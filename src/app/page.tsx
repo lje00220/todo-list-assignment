@@ -1,5 +1,6 @@
 'use client';
 
+import TodoInputForm from '@/components/TodoInputForm';
 import TodoItem from '@/components/TodoItem';
 import { useTodoQuery } from '@/hooks/useTodoQuery';
 
@@ -17,15 +18,7 @@ const TodoListPage = () => {
           <h1 className="mb-6 text-center text-3xl font-bold text-sky-600">
             투두리스트
           </h1>
-          <div className="flex w-full gap-3">
-            <input
-              type="text"
-              className="flex-1 rounded border border-sky-500 px-4 py-2"
-            />
-            <button className="rounded bg-sky-500 px-4 py-2 text-white">
-              추가하기
-            </button>
-          </div>
+          <TodoInputForm />
         </div>
 
         <hr className="border-b border-gray-200" />
