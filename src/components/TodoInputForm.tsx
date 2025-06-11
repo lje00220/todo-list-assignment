@@ -1,14 +1,22 @@
+import { useAddTodoMutation } from '@/hooks/useTodoMutation';
 import { useState } from 'react';
 
 const TodoInputForm = () => {
   const [inputValue, setInputValue] = useState<string>('');
+  const { mutate: addTodoMutate } = useAddTodoMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
+  const handleAddTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addTodoMutate({ title: inputValue, completed: false });
+    setInputValue('');
+  };
+
   return (
-    <form className="flex w-full gap-3">
+    <form className="flex w-full gap-3" onSubmit={handleAddTodo}>
       <input
         type="text"
         value={inputValue}
