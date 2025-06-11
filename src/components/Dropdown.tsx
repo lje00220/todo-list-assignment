@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { FilterOptionType, FilterType } from '@/types/TodoType';
+import { FILTERS } from '@/constants';
 
 interface DropdownProps {
-  setFilteredOption: (option: string) => void;
+  setFilteredOption: (option: FilterType) => void;
 }
 
 /**
@@ -11,18 +13,18 @@ interface DropdownProps {
  */
 const Dropdown = ({ setFilteredOption }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const options = [
+  const options: FilterOptionType[] = [
     {
       label: '전체 보기',
-      value: 'all',
+      value: FILTERS.ALL,
     },
     {
       label: '남은 할 일',
-      value: 'active',
+      value: FILTERS.ACTIVE,
     },
     {
       label: '완료한 일',
-      value: 'completed',
+      value: FILTERS.COMPLETED,
     },
   ];
 
@@ -30,7 +32,7 @@ const Dropdown = ({ setFilteredOption }: DropdownProps) => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectOption = (option: string) => {
+  const handleSelectOption = (option: FilterType) => {
     setFilteredOption(option);
     setIsOpen(false);
   };

@@ -1,6 +1,6 @@
-import { API_PATHS } from '@/constants';
-import { TodoType } from '@/types/TodoType';
 import axios from 'axios';
+import { API_PATHS, FILTERS } from '@/constants';
+import { FilterType, TodoType } from '@/types/TodoType';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -11,12 +11,14 @@ const api = axios.create({
  * @param filteredOption - 필터링 옵션 (all, active, completed)
  * @returns Promise<TodoType[]> - todo 리스트
  */
-export const getTodos = async (filteredOption: string): Promise<TodoType[]> => {
+export const getTodos = async (
+  filteredOption: FilterType,
+): Promise<TodoType[]> => {
   let url = API_PATHS.todos;
 
-  if (filteredOption === 'active') {
+  if (filteredOption === FILTERS.ACTIVE) {
     url += '?completed=false';
-  } else if (filteredOption === 'completed') {
+  } else if (filteredOption === FILTERS.COMPLETED) {
     url += '?completed=true';
   }
 

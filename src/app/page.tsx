@@ -1,13 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import Dropdown from '@/components/Dropdown';
 import TodoInputForm from '@/components/TodoInputForm';
 import TodoItem from '@/components/TodoItem';
 import { useTodoQuery } from '@/hooks/useTodoQuery';
-import { useState } from 'react';
+import { FILTERS } from '@/constants';
+import { FilterType } from '@/types/TodoType';
 
 const TodoListPage = () => {
-  const [filteredOption, setFilteredOption] = useState<string>('all');
+  const [filteredOption, setFilteredOption] = useState<FilterType>(FILTERS.ALL);
 
   const { data: todos, isLoading, isError } = useTodoQuery(filteredOption);
 
