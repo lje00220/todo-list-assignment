@@ -8,10 +8,19 @@ const api = axios.create({
 
 /**
  * GET 요청을 통해 todo 리스트를 가져오는 함수
+ * @param filteredOption - 필터링 옵션 (all, active, completed)
  * @returns Promise<TodoType[]> - todo 리스트
  */
-export const getTodos = async (): Promise<TodoType[]> => {
-  const response = await api.get(API_PATHS.todos);
+export const getTodos = async (filteredOption: string): Promise<TodoType[]> => {
+  let url = API_PATHS.todos;
+
+  if (filteredOption === 'active') {
+    url += '?completed=false';
+  } else if (filteredOption === 'completed') {
+    url += '?completed=true';
+  }
+
+  const response = await api.get(url);
   return response.data;
 };
 
