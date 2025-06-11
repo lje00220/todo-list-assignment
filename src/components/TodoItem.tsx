@@ -53,33 +53,33 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-md border px-4 py-3 shadow-sm">
-      <div className="flex items-center gap-3">
+    <div className="flex items-center justify-between gap-5 rounded-md border px-4 py-3 shadow-sm sm:gap-3">
+      <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
         <input
           type="checkbox"
           checked={todo.completed}
           onChange={handleToggleTodo}
-          className="h-5 w-5 cursor-pointer"
+          className="h-5 w-5 flex-shrink-0 cursor-pointer"
         />
         {isEditing ? (
           <input
             type="text"
             value={editValue}
             onChange={handleEditValueChange}
-            className="h-full rounded border border-gray-300 p-1"
+            className="h-8 min-w-0 flex-1 rounded border border-gray-300 px-3 py-1 text-sm"
           />
         ) : (
-          <p className="h-full">{todo.title}</p>
+          <p className="h-full min-w-0 flex-1">{todo.title}</p>
         )}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-shrink-0 gap-2">
         <button
           onClick={handleUpdateTodo}
           className="flex items-center gap-1 rounded-md bg-blue-500 px-3 py-1 text-sm text-white transition hover:bg-blue-600"
         >
           <Pencil size={16} />
-          <span>{isEditing ? '저장' : '수정'}</span>
+          <span className="hidden sm:block">{isEditing ? '저장' : '수정'}</span>
         </button>
 
         <button
@@ -87,7 +87,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           className="flex items-center gap-1 rounded-md bg-red-400 px-3 py-1 text-sm text-white transition hover:bg-red-500"
         >
           <Trash2 size={16} />
-          <span>삭제</span>
+          <span className="hidden sm:block">삭제</span>
         </button>
       </div>
     </div>
