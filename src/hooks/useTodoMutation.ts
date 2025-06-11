@@ -1,4 +1,5 @@
 import { postTodos } from '@/apis/todoApi';
+import { QUERY_KEY } from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**
@@ -10,7 +11,7 @@ export const useAddTodoMutation = () => {
     mutationFn: postTodos,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['todos'],
+        queryKey: [QUERY_KEY.todos],
       });
     },
   });
