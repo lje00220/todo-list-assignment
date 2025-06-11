@@ -1,23 +1,13 @@
+'use client';
+
 import TodoItem from '@/components/TodoItem';
+import { useTodoQuery } from '@/hooks/useTodoQuery';
 
 const TodoListPage = () => {
-  const MOCK_DATA = [
-    {
-      id: '1',
-      title: '첫 번째 할 일',
-      completed: false,
-    },
-    {
-      id: '2',
-      title: '두 번째 할 일',
-      completed: false,
-    },
-    {
-      id: '3',
-      title: '세 번째 할 일',
-      completed: false,
-    },
-  ];
+  const { data: todos, isLoading, isError } = useTodoQuery();
+
+  if (isLoading) return <div>로딩중...</div>;
+  if (isError) return <div>데이터를 불러오는 데 문제가 발생했습니다.</div>;
 
   return (
     <div className="flex h-screen items-center justify-center bg-[#558bcf]">
@@ -42,9 +32,7 @@ const TodoListPage = () => {
 
         {/* 리스트 영역 */}
         <div className="flex flex-col gap-3 px-6 py-6">
-          {MOCK_DATA.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
-          ))}
+          {todos?.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
         </div>
       </div>
     </div>
