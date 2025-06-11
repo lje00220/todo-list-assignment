@@ -1,5 +1,6 @@
 'use client';
 
+import Dropdown from '@/components/Dropdown';
 import TodoInputForm from '@/components/TodoInputForm';
 import TodoItem from '@/components/TodoItem';
 import { useTodoQuery } from '@/hooks/useTodoQuery';
@@ -25,6 +26,9 @@ const TodoListPage = () => {
 
         {/* 리스트 영역 */}
         <div className="flex flex-col gap-3 px-6 py-6">
+          <div className="flex justify-end">
+            <Dropdown />
+          </div>
           {todos?.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
         </div>
       </div>
