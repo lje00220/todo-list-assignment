@@ -30,3 +30,11 @@ export const addTodo = async (todo: Omit<TodoType, 'id'>) => {
 export const deleteTodo = async (id: string) => {
   await api.delete(`${API_PATHS.todos}/${id}`);
 };
+
+/**
+ * PATCH 요청을 통해 특정 todo를 업데이트하는 함수
+ * @param todo - 업데이트할 todo 객체
+ */
+export const updateTodo = async (editTodo: TodoType) => {
+  await api.patch(`${API_PATHS.todos}/${editTodo.id}`, editTodo);
+};
