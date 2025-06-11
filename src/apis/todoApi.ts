@@ -14,7 +14,7 @@ const api = axios.create({
 export const getTodos = async (
   filteredOption: FilterType,
 ): Promise<TodoType[]> => {
-  let url = API_PATHS.todos;
+  let url = API_PATHS.TODOS;
 
   if (filteredOption === FILTERS.ACTIVE) {
     url += '?completed=false';
@@ -31,7 +31,7 @@ export const getTodos = async (
  * @param todo - id를 제외한 todo 객체
  */
 export const addTodo = async (todo: Omit<TodoType, 'id'>) => {
-  await api.post(API_PATHS.todos, todo);
+  await api.post(API_PATHS.TODOS, todo);
 };
 
 /**
@@ -39,7 +39,7 @@ export const addTodo = async (todo: Omit<TodoType, 'id'>) => {
  * @param id - 삭제할 todo 아이디
  */
 export const deleteTodo = async (id: string) => {
-  await api.delete(`${API_PATHS.todos}/${id}`);
+  await api.delete(`${API_PATHS.TODOS}/${id}`);
 };
 
 /**
@@ -47,5 +47,5 @@ export const deleteTodo = async (id: string) => {
  * @param todo - 업데이트할 todo 객체
  */
 export const updateTodo = async (editTodo: TodoType) => {
-  await api.patch(`${API_PATHS.todos}/${editTodo.id}`, editTodo);
+  await api.patch(`${API_PATHS.TODOS}/${editTodo.id}`, editTodo);
 };

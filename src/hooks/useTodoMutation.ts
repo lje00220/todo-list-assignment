@@ -1,5 +1,5 @@
 import { deleteTodo, addTodo, updateTodo } from '@/apis/todoApi';
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEYS } from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**
@@ -11,7 +11,7 @@ export const useAddTodoMutation = () => {
     mutationFn: addTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.todos],
+        queryKey: [QUERY_KEYS.TODOS],
       });
     },
   });
@@ -26,7 +26,7 @@ export const useDeleteTodoMutation = () => {
     mutationFn: deleteTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.todos],
+        queryKey: [QUERY_KEYS.TODOS],
       });
     },
   });
@@ -41,7 +41,7 @@ export const useUpdateTodoMutation = () => {
     mutationFn: updateTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.todos],
+        queryKey: [QUERY_KEYS.TODOS],
       });
     },
   });

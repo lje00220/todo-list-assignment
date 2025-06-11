@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTodos } from '@/apis/todoApi';
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEYS } from '@/constants';
 import { FilterType } from '@/types/TodoType';
 
 /**
@@ -8,7 +8,7 @@ import { FilterType } from '@/types/TodoType';
  */
 export const useTodoQuery = (filteredOption: FilterType) => {
   return useQuery({
-    queryKey: [QUERY_KEY.todos, filteredOption],
+    queryKey: [QUERY_KEYS.TODOS, filteredOption],
     queryFn: () => getTodos(filteredOption),
   });
 };
