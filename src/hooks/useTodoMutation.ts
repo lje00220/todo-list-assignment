@@ -1,4 +1,4 @@
-import { postTodos } from '@/apis/todoApi';
+import { deleteTodo, addTodo } from '@/apis/todoApi';
 import { QUERY_KEY } from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -8,7 +8,22 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 export const useAddTodoMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: postTodos,
+    mutationFn: addTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.todos],
+      });
+    },
+  });
+};
+
+/**
+ * 특정 todo를 삭제하는 useMutation 커스텀 훅
+ */
+export const useDeleteTodoMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.todos],
