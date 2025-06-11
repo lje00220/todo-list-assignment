@@ -12,7 +12,10 @@
     "@tanstack/react-query": "^5.80.6",
     "@tanstack/react-query-devtools": "4",
     "json-server": "1.0.0-beta.3",
+    "lucide-react": "^0.513.0",
     "next": "14.2.29",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12",
     "react": "^18",
     "react-dom": "^18"
   },
