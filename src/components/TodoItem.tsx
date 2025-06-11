@@ -16,7 +16,7 @@ interface TodoItemProps {
  * @returns {JSX.Element}
  */
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const [editValue, setEditValue] = useState<string>('');
+  const [editValue, setEditValue] = useState<string>(todo.title);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const { mutate: updateTodoMutate } = useUpdateTodoMutation();
@@ -34,12 +34,17 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const handleUpdateTodo = () => {
     if (!isEditing) {
       setIsEditing(true);
-    } else {
-      const editTodo = { ...todo, title: editValue };
-      updateTodoMutate(editTodo);
-      setEditValue('');
-      setIsEditing(false);
     }
+
+    // 입력값이 비어있는 경우를 방지
+    if (editValue.length === 0) {
+      alert('1자 이상 입력해주세요!');
+      return;
+    }
+
+    const editTodo = { ...todo, title: editValue };
+    updateTodoMutate(editTodo);
+    setIsEditing(false);
   };
 
   const handleDeleteTodo = () => {
@@ -47,7 +52,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   return (
-    <div key={todo.id} className="flex items-center gap-3 px-4 py-2">
+    <div className="flex items-center gap-3 px-4 py-2">
       <input
         type="checkbox"
         checked={todo.completed}
@@ -55,6 +60,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       />
       {isEditing ? (
         <input
+          type="text"
           value={editValue}
           onChange={handleEditValueChange}
           className="rounded border border-sky-500 px-2 py-1"
