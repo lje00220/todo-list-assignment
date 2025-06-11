@@ -39,17 +39,21 @@ const Dropdown = ({ setFilteredOption }: DropdownProps) => {
 
   return (
     <div className="relative text-left">
-      <button onClick={handleToggleDropdown} className="flex">
-        필터링 {isOpen ? <ChevronUp /> : <ChevronDown />}
+      <button
+        onClick={handleToggleDropdown}
+        className="flex items-center gap-1 px-3 py-2 text-sm transition hover:font-bold"
+      >
+        필터링 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
       </button>
+
       {isOpen && (
-        <div className="absolute w-32 rounded-md bg-gray-100 px-3 py-3 shadow-xl">
-          <ul className="flex flex-col gap-2 text-center">
+        <div className="absolute mt-2 w-28 rounded-md border border-gray-200 bg-white shadow-lg">
+          <ul className="flex flex-col gap-1 text-center text-sm">
             {options.map((option) => (
               <li
-                onClick={() => handleSelectOption(option.value)}
                 key={option.value}
-                className="cursor-pointer"
+                onClick={() => handleSelectOption(option.value)}
+                className="cursor-pointer px-3 py-2 transition hover:bg-gray-100"
               >
                 {option.label}
               </li>

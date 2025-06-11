@@ -53,38 +53,41 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2">
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={handleToggleTodo}
-      />
-      {isEditing ? (
+    <div className="flex items-center justify-between gap-5 rounded-md border px-4 py-3 shadow-sm sm:gap-3">
+      <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
         <input
-          type="text"
-          value={editValue}
-          onChange={handleEditValueChange}
-          className="rounded border border-sky-500 px-2 py-1"
+          type="checkbox"
+          checked={todo.completed}
+          onChange={handleToggleTodo}
+          className="h-5 w-5 flex-shrink-0 cursor-pointer"
         />
-      ) : (
-        <p>{todo.title}</p>
-      )}
+        {isEditing ? (
+          <input
+            type="text"
+            value={editValue}
+            onChange={handleEditValueChange}
+            className="h-8 min-w-0 flex-1 rounded border border-gray-300 px-3 py-1 text-sm"
+          />
+        ) : (
+          <p className="h-full min-w-0 flex-1">{todo.title}</p>
+        )}
+      </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-shrink-0 gap-2">
         <button
           onClick={handleUpdateTodo}
-          className="flex gap-1 rounded-md bg-blue-500 px-2 py-1"
+          className="flex items-center gap-1 rounded-md bg-blue-500 px-3 py-1 text-sm text-white transition hover:bg-blue-600"
         >
-          <Pencil color="white" />
-          <span className="text-white">{isEditing ? '저장' : '수정'}</span>
+          <Pencil size={16} />
+          <span className="hidden sm:block">{isEditing ? '저장' : '수정'}</span>
         </button>
 
         <button
           onClick={handleDeleteTodo}
-          className="flex gap-1 rounded-md bg-red-400 px-2 py-1"
+          className="flex items-center gap-1 rounded-md bg-red-400 px-3 py-1 text-sm text-white transition hover:bg-red-500"
         >
-          <Trash2 color="white" />
-          <span className="text-white">삭제</span>
+          <Trash2 size={16} />
+          <span className="hidden sm:block">삭제</span>
         </button>
       </div>
     </div>
