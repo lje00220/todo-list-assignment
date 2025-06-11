@@ -26,6 +26,11 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     setEditValue(e.target.value);
   };
 
+  const handleToggleTodo = () => {
+    const editTodo = { ...todo, completed: !todo.completed };
+    updateTodoMutate(editTodo);
+  };
+
   const handleUpdateTodo = () => {
     if (!isEditing) {
       setIsEditing(true);
@@ -43,7 +48,11 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
   return (
     <div key={todo.id} className="flex items-center gap-3 px-4 py-2">
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={handleToggleTodo}
+      />
       {isEditing ? (
         <input
           value={editValue}
