@@ -53,38 +53,41 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2">
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={handleToggleTodo}
-      />
-      {isEditing ? (
+    <div className="flex items-center justify-between gap-3 rounded-md border px-4 py-3 shadow-sm">
+      <div className="flex items-center gap-3">
         <input
-          type="text"
-          value={editValue}
-          onChange={handleEditValueChange}
-          className="rounded border border-sky-500 px-2 py-1"
+          type="checkbox"
+          checked={todo.completed}
+          onChange={handleToggleTodo}
+          className="h-5 w-5 cursor-pointer"
         />
-      ) : (
-        <p>{todo.title}</p>
-      )}
+        {isEditing ? (
+          <input
+            type="text"
+            value={editValue}
+            onChange={handleEditValueChange}
+            className="h-full rounded border border-gray-300 p-1"
+          />
+        ) : (
+          <p className="h-full">{todo.title}</p>
+        )}
+      </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <button
           onClick={handleUpdateTodo}
-          className="flex gap-1 rounded-md bg-blue-500 px-2 py-1"
+          className="flex items-center gap-1 rounded-md bg-blue-500 px-3 py-1 text-sm text-white transition hover:bg-blue-600"
         >
-          <Pencil color="white" />
-          <span className="text-white">{isEditing ? '저장' : '수정'}</span>
+          <Pencil size={16} />
+          <span>{isEditing ? '저장' : '수정'}</span>
         </button>
 
         <button
           onClick={handleDeleteTodo}
-          className="flex gap-1 rounded-md bg-red-400 px-2 py-1"
+          className="flex items-center gap-1 rounded-md bg-red-400 px-3 py-1 text-sm text-white transition hover:bg-red-500"
         >
-          <Trash2 color="white" />
-          <span className="text-white">삭제</span>
+          <Trash2 size={16} />
+          <span>삭제</span>
         </button>
       </div>
     </div>

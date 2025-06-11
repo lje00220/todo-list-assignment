@@ -21,9 +21,10 @@ const TodoInputForm = () => {
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        className="flex-1 rounded border border-sky-500 px-4 py-2"
+        placeholder="할 일을 입력해 주세요."
+        className="flex-1 rounded border border-gray-300 px-3 py-2 transition focus:border-sky-400"
       />
-      <button className="rounded bg-sky-500 px-4 py-2 text-white">
+      <button className="rounded bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600">
         추가하기
       </button>
     </form>
