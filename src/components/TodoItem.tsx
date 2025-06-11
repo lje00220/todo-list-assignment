@@ -34,6 +34,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const handleUpdateTodo = () => {
     if (!isEditing) {
       setIsEditing(true);
+      return;
     }
 
     // 입력값이 비어있는 경우를 방지
