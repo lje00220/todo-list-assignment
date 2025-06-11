@@ -5,3 +5,9 @@ export const QUERY_KEY = {
 export const API_PATHS = {
   todos: '/todos',
 };
+
+export const FILTERS = {
+  ALL: 'all',
+  ACTIVE: 'active',
+  COMPLETED: 'completed',
+} as const;
