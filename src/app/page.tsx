@@ -1,3 +1,5 @@
+import TodoItem from '@/components/TodoItem';
+
 const TodoListPage = () => {
   const MOCK_DATA = [
     {
@@ -41,10 +43,7 @@ const TodoListPage = () => {
         {/* 리스트 영역 */}
         <div className="flex flex-col gap-3 px-6 py-6">
           {MOCK_DATA.map((todo) => (
-            <div key={todo.id} className="flex gap-3 px-4 py-2">
-              <input type="checkbox" />
-              <p>{todo.title}</p>
-            </div>
+            <TodoItem key={todo.id} todo={todo} />
           ))}
         </div>
       </div>
