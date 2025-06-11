@@ -31,8 +31,8 @@ const TodoListClient = () => {
   });
 
   return (
-    <div className="flex max-h-fit min-h-screen items-center justify-center bg-gray-100">
-      <div className="flex h-5/6 w-full flex-col rounded-lg bg-white py-10 shadow-xl sm:w-2/3 md:w-3/5 lg:w-1/2">
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="flex h-[80vh] w-full flex-col rounded-lg bg-white py-10 shadow-xl sm:h-[70vh] sm:w-2/3 md:w-3/5 lg:w-1/2">
         {/* 상단 바 영역 */}
         <div className="px-6 py-8">
           <h1 className="mb-6 text-center text-3xl font-bold">투두리스트</h1>
@@ -42,7 +42,7 @@ const TodoListClient = () => {
         <hr className="border-b border-gray-200" />
 
         {/* 리스트 영역 */}
-        <div className="flex flex-col gap-3 px-4 py-6 sm:px-8">
+        <div className="flex flex-col gap-3 overflow-y-auto px-4 py-6 sm:px-8">
           <div className="flex justify-end">
             <Dropdown setFilteredOption={setFilteredOption} />
           </div>
