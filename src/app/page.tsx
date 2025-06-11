@@ -16,6 +16,15 @@ const TodoListPage = () => {
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>데이터를 불러오는 데 문제가 발생했습니다.</div>;
 
+  // 완료한 일을 뒤로 정렬하는 로직
+  todos?.sort((a, b) => {
+    if (a.completed === b.completed) {
+      return a.id.localeCompare(b.id);
+    } else {
+      return a.completed ? 1 : -1;
+    }
+  });
+
   return (
     <div className="flex h-screen items-center justify-center bg-[#558bcf]">
       <div className="flex h-5/6 w-1/3 flex-col rounded-lg bg-white py-10">
