@@ -76,6 +76,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       <div className="flex flex-shrink-0 gap-2">
         <button
           onClick={handleUpdateTodo}
+          aria-label="할 일 제목 수정하기"
           className="flex items-center gap-1 rounded-md bg-blue-500 px-3 py-1 text-sm text-white transition hover:bg-blue-600"
         >
           <Pencil size={16} />
@@ -84,6 +85,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
         <button
           onClick={handleDeleteTodo}
+          aria-label="할 일 삭제하기"
           className="flex items-center gap-1 rounded-md bg-red-400 px-3 py-1 text-sm text-white transition hover:bg-red-500"
         >
           <Trash2 size={16} />
