@@ -19,6 +19,14 @@ export const getTodos = async (): Promise<TodoType[]> => {
  * POST 요청을 통해 새로운 todo를 추가하는 함수
  * @param todo - id를 제외한 todo 객체
  */
-export const postTodos = async (todo: Omit<TodoType, 'id'>) => {
+export const addTodo = async (todo: Omit<TodoType, 'id'>) => {
   await api.post(API_PATHS.todos, todo);
+};
+
+/**
+ * DELETE 요청을 통해 특정 todo를 삭제하는 함수
+ * @param id - 삭제할 todo 아이디
+ */
+export const deleteTodo = async (id: string) => {
+  await api.delete(`${API_PATHS.todos}/${id}`);
 };
