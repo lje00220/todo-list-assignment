@@ -10,5 +10,7 @@ export const useTodoQuery = (filteredOption: FilterType) => {
   return useQuery({
     queryKey: getTodoQueryKey(filteredOption),
     queryFn: () => getTodos(filteredOption),
+    staleTime: 0,
+    refetchOnMount: true,
   });
 };
