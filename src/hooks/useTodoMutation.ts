@@ -44,7 +44,7 @@ export const useAddTodoMutation = () => {
 
       queryClient.setQueryData<TodoType[]>(
         [QUERY_KEYS.TODOS, filteredOption],
-        (old) => [tempTodo, ...(old ?? [])],
+        (old) => [...(old ?? []), tempTodo],
       );
 
       return { previousTodos };
