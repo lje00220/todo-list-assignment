@@ -1,5 +1,6 @@
-import { useAddTodoMutation } from '@/hooks/useTodoMutation';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useAddTodoMutation } from '@/hooks/useTodoMutation';
 
 const TodoInputForm = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -11,6 +12,13 @@ const TodoInputForm = () => {
 
   const handleAddTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // 입력값이 비어있는 경우를 방지
+    if (inputValue.trim().length === 0) {
+      toast.error('할 일을 입력해 주세요!');
+      return;
+    }
+
     addTodoMutate({ title: inputValue, completed: false });
     setInputValue('');
   };
