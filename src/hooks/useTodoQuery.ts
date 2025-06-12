@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTodos } from '@/apis/todoApi';
-import { QUERY_KEYS } from '@/constants';
 import { FilterType } from '@/types/TodoType';
 import { getTodoQueryKey } from '@/utils/getTodoQueryKey';
 
