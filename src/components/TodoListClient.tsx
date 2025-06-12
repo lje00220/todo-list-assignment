@@ -26,7 +26,7 @@ const TodoListClient = () => {
   // 완료한 일을 뒤로 정렬하는 로직
   const sortedTodos = [...(todos ?? [])].sort((a, b) => {
     if (a.completed === b.completed) {
-      return a.id.localeCompare(b.id);
+      return Number(a.id) - Number(b.id);
     } else {
       return a.completed ? 1 : -1;
     }
@@ -37,7 +37,7 @@ const TodoListClient = () => {
       {/* 상단 바 영역 */}
       <header className="px-6 py-8">
         <h1 className="mb-6 text-center text-3xl font-bold">투두리스트</h1>
-        <TodoInputForm filteredOption={filteredOption} />
+        <TodoInputForm />
       </header>
 
       <hr className="border-b border-gray-200" />
@@ -54,13 +54,7 @@ const TodoListClient = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          sortedTodos?.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              filteredOption={filteredOption}
-            />
-          ))
+          sortedTodos?.map((todo) => <TodoItem key={todo.id} todo={todo} />)
         )}
       </section>
     </Container>
