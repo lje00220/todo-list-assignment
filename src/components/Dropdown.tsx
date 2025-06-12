@@ -4,14 +4,17 @@ import { FilterOptionType, FilterType } from '@/types/TodoType';
 import { FILTERS } from '@/constants';
 
 interface DropdownProps {
+  filteredOption: FilterType;
   setFilteredOption: (option: FilterType) => void;
 }
 
 /**
  * 드롭다운 컴포넌트
+ * @param filteredOption - 현재 선택된 필터 옵션
+ * @param setFilteredOption - 필터 옵션을 업데이트하는 함수
  * @returns {JSX.Element}
  */
-const Dropdown = ({ setFilteredOption }: DropdownProps) => {
+const Dropdown = ({ filteredOption, setFilteredOption }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const options: FilterOptionType[] = [
     {
@@ -28,6 +31,10 @@ const Dropdown = ({ setFilteredOption }: DropdownProps) => {
     },
   ];
 
+  const selectedLabel = options.find(
+    (option) => option.value === filteredOption,
+  )?.label;
+
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -43,7 +50,8 @@ const Dropdown = ({ setFilteredOption }: DropdownProps) => {
         onClick={handleToggleDropdown}
         className="flex items-center gap-1 px-3 py-2 text-sm transition hover:font-bold"
       >
-        필터링 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        {selectedLabel}{' '}
+        {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
       </button>
 
       {isOpen && (

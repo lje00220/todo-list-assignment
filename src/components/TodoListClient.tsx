@@ -45,7 +45,10 @@ const TodoListClient = () => {
       {/* 리스트 영역 */}
       <section className="flex h-full flex-col gap-3 overflow-y-auto px-4 py-6 sm:px-8">
         <div className="flex justify-end">
-          <Dropdown setFilteredOption={setFilteredOption} />
+          <Dropdown
+            filteredOption={filteredOption}
+            setFilteredOption={setFilteredOption}
+          />
         </div>
 
         {isLoading ? (
