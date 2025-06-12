@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAddTodoMutation } from '@/hooks/useTodoMutation';
 
+/**
+ * 투두 입력 폼 컴포넌트
+ * - 새로운 투두를 추가할 수 있는 입력 폼
+ * @returns {JSX.Element}
+ */
 const TodoInputForm = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const { mutate: addTodoMutate } = useAddTodoMutation();
@@ -19,7 +24,12 @@ const TodoInputForm = () => {
       return;
     }
 
-    addTodoMutate({ title: inputValue, completed: false });
+    const newTodo = {
+      title: inputValue,
+      completed: false,
+    };
+
+    addTodoMutate(newTodo);
     setInputValue('');
   };
 
