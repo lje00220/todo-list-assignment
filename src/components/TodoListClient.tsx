@@ -24,7 +24,7 @@ const TodoListClient = () => {
   if (isError) return <Error />;
 
   // 완료한 일을 뒤로 정렬하는 로직
-  todos?.sort((a, b) => {
+  const sortedTodos = [...(todos ?? [])].sort((a, b) => {
     if (a.completed === b.completed) {
       return a.id.localeCompare(b.id);
     } else {
@@ -45,13 +45,16 @@ const TodoListClient = () => {
       {/* 리스트 영역 */}
       <section className="flex h-full flex-col gap-3 overflow-y-auto px-4 py-6 sm:px-8">
         <div className="flex justify-end">
-          <Dropdown setFilteredOption={setFilteredOption} />
+          <Dropdown
+            filteredOption={filteredOption}
+            setFilteredOption={setFilteredOption}
+          />
         </div>
 
         {isLoading ? (
           <Loading />
         ) : (
-          todos?.map((todo) => (
+          sortedTodos?.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}

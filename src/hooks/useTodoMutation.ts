@@ -4,6 +4,7 @@ import { deleteTodo, addTodo, updateTodo } from '@/apis/todoApi';
 import { QUERY_KEYS } from '@/constants';
 import { FilterType, TodoType } from '@/types/TodoType';
 import { invalidateTodoQueries } from '@/utils/invalidateTodoQueries';
+import { getTodoQueryKey } from '@/utils/getTodoQueryKey';
 
 interface AddTodoParameters {
   newTodo: Omit<TodoType, 'id'>;
@@ -28,24 +29,22 @@ export const useAddTodoMutation = () => {
   return useMutation({
     mutationFn: ({ newTodo }: AddTodoParameters) => addTodo(newTodo),
     onMutate: async ({ newTodo, filteredOption }) => {
+      const queryKey = getTodoQueryKey(filteredOption);
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEYS.TODOS, filteredOption],
+        queryKey: queryKey,
       });
 
-      const previousTodos = queryClient.getQueryData<TodoType[]>([
-        QUERY_KEYS.TODOS,
-        filteredOption,
-      ]);
+      const previousTodos = queryClient.getQueryData<TodoType[]>(queryKey);
 
       const tempTodo = {
         ...newTodo,
         id: Date.now().toString(), // 임시 id
       };
 
-      queryClient.setQueryData<TodoType[]>(
-        [QUERY_KEYS.TODOS, filteredOption],
-        (old) => [tempTodo, ...(old ?? [])],
-      );
+      queryClient.setQueryData<TodoType[]>(queryKey, (old) => [
+        ...(old ?? []),
+        tempTodo,
+      ]);
 
       return { previousTodos };
     },
@@ -68,18 +67,15 @@ export const useDeleteTodoMutation = () => {
     mutationFn: ({ deleteTodoId }: DeleteTodoParameters) =>
       deleteTodo(deleteTodoId),
     onMutate: async ({ deleteTodoId, filteredOption }) => {
+      const queryKey = getTodoQueryKey(filteredOption);
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEYS.TODOS, filteredOption],
+        queryKey: queryKey,
       });
 
-      const previousTodos = queryClient.getQueryData<TodoType[]>([
-        QUERY_KEYS.TODOS,
-        filteredOption,
-      ]);
+      const previousTodos = queryClient.getQueryData<TodoType[]>(queryKey);
 
-      queryClient.setQueryData<TodoType[]>(
-        [QUERY_KEYS.TODOS, filteredOption],
-        (old) => old?.filter((todo) => todo.id !== deleteTodoId),
+      queryClient.setQueryData<TodoType[]>(queryKey, (old) =>
+        old?.filter((todo) => todo.id !== deleteTodoId),
       );
 
       return { previousTodos };
@@ -103,21 +99,17 @@ export const useUpdateTodoMutation = () => {
     mutationFn: ({ updatedTodo }: UpdateTodoParameters) =>
       updateTodo(updatedTodo),
     onMutate: async ({ updatedTodo, filteredOption }) => {
+      const queryKey = getTodoQueryKey(filteredOption);
       await queryClient.cancelQueries({
-        queryKey: [QUERY_KEYS.TODOS, filteredOption],
+        queryKey: queryKey,
       });
 
-      const previousTodos = queryClient.getQueryData<TodoType[]>([
-        QUERY_KEYS.TODOS,
-        filteredOption,
-      ]);
+      const previousTodos = queryClient.getQueryData<TodoType[]>(queryKey);
 
-      queryClient.setQueryData<TodoType[]>(
-        [QUERY_KEYS.TODOS, filteredOption],
-        (old) =>
-          old?.map((todo) =>
-            todo.id === updatedTodo.id ? { ...todo, ...updatedTodo } : todo,
-          ),
+      queryClient.setQueryData<TodoType[]>(queryKey, (old) =>
+        old?.map((todo) =>
+          todo.id === updatedTodo.id ? { ...todo, ...updatedTodo } : todo,
+        ),
       );
 
       return { previousTodos };

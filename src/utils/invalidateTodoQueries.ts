@@ -1,6 +1,6 @@
-import { QUERY_KEYS } from '@/constants';
-import { FilterType } from '@/types/TodoType';
 import { QueryClient } from '@tanstack/react-query';
+import { getTodoQueryKey } from './getTodoQueryKey';
+import { FilterType } from '@/types/TodoType';
 
 /**
  * todos 쿼리 무효화 유틸 함수
@@ -12,6 +12,6 @@ export const invalidateTodoQueries = (
   filteredOption: FilterType,
 ) => {
   queryClient.invalidateQueries({
-    queryKey: [QUERY_KEYS.TODOS, filteredOption],
+    queryKey: getTodoQueryKey(filteredOption),
   });
 };
