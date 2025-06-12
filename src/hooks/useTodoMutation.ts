@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTodo, addTodo, updateTodo } from '@/apis/todoApi';
 import { QUERY_KEYS } from '@/constants';
 import { TodoType } from '@/types/TodoType';
+import { invalidateTodoQueries } from '@/utils/invalidateTodoQueries';
 
 /**
  * 새로운 todo를 추가하는 useMutation 커스텀 훅
@@ -35,9 +36,7 @@ export const useAddTodoMutation = () => {
       toast.error('투두 추가에 실패했습니다.');
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.TODOS],
-      });
+      invalidateTodoQueries(queryClient);
     },
   });
 };
@@ -67,9 +66,7 @@ export const useDeleteTodoMutation = () => {
       toast.error('투두 삭제에 실패했습니다.');
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.TODOS],
-      });
+      invalidateTodoQueries(queryClient);
     },
   });
 };
@@ -101,9 +98,7 @@ export const useUpdateTodoMutation = () => {
       toast.error('투두 업데이트에 실패했습니다.');
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.TODOS],
-      });
+      invalidateTodoQueries(queryClient);
     },
   });
 };
