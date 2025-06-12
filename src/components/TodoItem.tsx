@@ -62,6 +62,7 @@ const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
           type="checkbox"
           checked={todo.completed}
           onChange={handleToggleTodo}
+          aria-label="할 일 완료 여부"
           className="h-5 w-5 flex-shrink-0 cursor-pointer"
         />
         {isEditing ? (
@@ -80,7 +81,7 @@ const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
         <button
           onClick={handleUpdateTodo}
           aria-label="할 일 제목 수정하기"
-          className="flex items-center gap-1 rounded-md bg-blue-500 px-3 py-1 text-sm text-white transition hover:bg-blue-600"
+          className="flex items-center gap-1 rounded-md bg-blue-600 px-3 py-1 text-sm text-white transition hover:bg-blue-700"
         >
           <Pencil size={16} />
           <span className="hidden sm:block">{isEditing ? '저장' : '수정'}</span>
@@ -89,7 +90,7 @@ const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
         <button
           onClick={handleDeleteTodo}
           aria-label="할 일 삭제하기"
-          className="flex items-center gap-1 rounded-md bg-red-400 px-3 py-1 text-sm text-white transition hover:bg-red-500"
+          className="flex items-center gap-1 rounded-md bg-red-600 px-3 py-1 text-sm text-white transition hover:bg-red-700"
         >
           <Trash2 size={16} />
           <span className="hidden sm:block">삭제</span>

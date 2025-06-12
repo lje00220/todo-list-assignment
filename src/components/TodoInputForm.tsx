@@ -47,8 +47,9 @@ const TodoInputForm = ({ filteredOption }: TodoInputFormProps) => {
         onChange={handleInputChange}
         placeholder="할 일을 입력해 주세요."
         className="flex-1 rounded border border-gray-300 px-3 transition focus:border-sky-400 sm:py-1 md:py-2"
+        autoFocus
       />
-      <button className="rounded bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600">
+      <button className="rounded bg-blue-600 px-4 py-2 text-sm text-white transition hover:bg-blue-700">
         추가
       </button>
     </form>

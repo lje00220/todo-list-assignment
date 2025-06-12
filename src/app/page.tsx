@@ -5,14 +5,15 @@ import {
 } from '@tanstack/react-query';
 import TodoListClient from '@/components/TodoListClient';
 import { getTodos } from '@/apis/todoApi';
-import { FILTERS, QUERY_KEYS } from '@/constants';
+import { getTodoQueryKey } from '@/utils/getTodoQueryKey';
+import { FILTERS } from '@/constants';
 
 const TodoListPage = async () => {
   const queryClient = new QueryClient();
   const defaultFilter = FILTERS.ALL;
 
   await queryClient.prefetchQuery({
-    queryKey: [QUERY_KEYS.TODOS, defaultFilter],
+    queryKey: getTodoQueryKey(defaultFilter),
     queryFn: () => getTodos(defaultFilter),
   });
 
