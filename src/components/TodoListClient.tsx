@@ -26,7 +26,7 @@ const TodoListClient = () => {
   // 완료한 일을 뒤로 정렬하는 로직
   const sortedTodos = [...(todos ?? [])].sort((a, b) => {
     if (a.completed === b.completed) {
-      return a.id.localeCompare(b.id);
+      return Number(a.id) - Number(b.id);
     } else {
       return a.completed ? 1 : -1;
     }
