@@ -52,8 +52,8 @@ export const useAddTodoMutation = () => {
       queryClient.setQueryData([QUERY_KEYS.TODOS], context?.previousTodos);
       toast.error('투두 추가에 실패했습니다.');
     },
-    onSettled: (data, error, variables) => {
-      invalidateTodoQueries(queryClient, variables.filteredOption);
+    onSettled: () => {
+      invalidateTodoQueries(queryClient);
     },
   });
 };
@@ -84,8 +84,8 @@ export const useDeleteTodoMutation = () => {
       queryClient.setQueryData([QUERY_KEYS.TODOS], context?.previousTodos);
       toast.error('투두 삭제에 실패했습니다.');
     },
-    onSettled: (data, error, variables) => {
-      invalidateTodoQueries(queryClient, variables.filteredOption);
+    onSettled: () => {
+      invalidateTodoQueries(queryClient);
     },
   });
 };
@@ -118,8 +118,8 @@ export const useUpdateTodoMutation = () => {
       queryClient.setQueryData([QUERY_KEYS.TODOS], context?.previousTodos);
       toast.error('투두 업데이트에 실패했습니다.');
     },
-    onSettled: (data, error, variables) => {
-      invalidateTodoQueries(queryClient, variables.filteredOption);
+    onSettled: () => {
+      invalidateTodoQueries(queryClient);
     },
   });
 };
