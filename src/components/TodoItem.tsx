@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { Pencil, Trash2 } from 'lucide-react';
 import {
   useDeleteTodoMutation,
   useUpdateTodoMutation,
 } from '@/hooks/useTodoMutation';
 import { TodoType } from '@/types/TodoType';
-import { Pencil, Trash2 } from 'lucide-react';
 
 interface TodoItemProps {
   todo: TodoType;
@@ -38,8 +39,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     }
 
     // 입력값이 비어있는 경우를 방지
-    if (editValue.length === 0) {
-      alert('1자 이상 입력해주세요!');
+    if (editValue.trim().length === 0) {
+      toast.error('1자 이상 입력해 주세요!');
       return;
     }
 
