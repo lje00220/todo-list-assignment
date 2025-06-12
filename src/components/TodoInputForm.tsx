@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAddTodoMutation } from '@/hooks/useTodoMutation';
+import { FilterType } from '@/types/TodoType';
+
+interface TodoInputFormProps {
+  filteredOption: FilterType;
+}
 
 /**
  * 투두 입력 폼 컴포넌트
  * - 새로운 투두를 추가할 수 있는 입력 폼
+ * @param filteredOption - 필터링 옵션(all, active, completed)
  * @returns {JSX.Element}
  */
-const TodoInputForm = () => {
+const TodoInputForm = ({ filteredOption }: TodoInputFormProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const { mutate: addTodoMutate } = useAddTodoMutation();
 
@@ -29,7 +35,7 @@ const TodoInputForm = () => {
       completed: false,
     };
 
-    addTodoMutate(newTodo);
+    addTodoMutate({ newTodo, filteredOption });
     setInputValue('');
   };
 
