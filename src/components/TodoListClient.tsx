@@ -24,7 +24,7 @@ const TodoListClient = () => {
   if (isError) return <Error />;
 
   // 완료한 일을 뒤로 정렬하는 로직
-  todos?.sort((a, b) => {
+  const sortedTodos = [...(todos ?? [])].sort((a, b) => {
     if (a.completed === b.completed) {
       return a.id.localeCompare(b.id);
     } else {
@@ -54,7 +54,7 @@ const TodoListClient = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          todos?.map((todo) => (
+          sortedTodos?.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}

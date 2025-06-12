@@ -31,6 +31,7 @@ const Dropdown = ({ filteredOption, setFilteredOption }: DropdownProps) => {
     },
   ];
 
+  // 현재 선택된 옵션의 라벨을 찾기
   const selectedLabel = options.find(
     (option) => option.value === filteredOption,
   )?.label;
