@@ -1,3 +1,7 @@
+/**
+ * 에러 UI 컴포넌트
+ * @returns {JSX.Element}
+ */
 const Error = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-2 bg-gray-100">
