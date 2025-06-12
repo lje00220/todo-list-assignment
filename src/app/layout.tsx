@@ -18,6 +18,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: 'Todo List',
   description: '간편하게 할 일을 관리할 수 있는 Todo List 앱입니다.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
