@@ -5,18 +5,20 @@ import {
   useDeleteTodoMutation,
   useUpdateTodoMutation,
 } from '@/hooks/useTodoMutation';
-import { TodoType } from '@/types/TodoType';
+import { FilterType, TodoType } from '@/types/TodoType';
 
 interface TodoItemProps {
   todo: TodoType;
+  filteredOption: FilterType;
 }
 
 /**
  * 투두 아이템 컴포넌트
  * @param todo - 개별 투두 아이템(id, title, completed 속성을 가짐)
+ * @param filteredOption - 필터링 옵션(all, active, completed)
  * @returns {JSX.Element}
  */
-const TodoItem = ({ todo }: TodoItemProps) => {
+const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
   const [editValue, setEditValue] = useState<string>(todo.title);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
@@ -28,8 +30,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   const handleToggleTodo = () => {
-    const editTodo = { ...todo, completed: !todo.completed };
-    updateTodoMutate(editTodo);
+    const updatedTodo = { ...todo, completed: !todo.completed };
+    updateTodoMutate({ updatedTodo, filteredOption });
   };
 
   const handleUpdateTodo = () => {
@@ -44,13 +46,13 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       return;
     }
 
-    const editTodo = { ...todo, title: editValue };
-    updateTodoMutate(editTodo);
+    const updatedTodo = { ...todo, title: editValue };
+    updateTodoMutate({ updatedTodo, filteredOption });
     setIsEditing(false);
   };
 
   const handleDeleteTodo = () => {
-    deleteTodoMutate(todo.id);
+    deleteTodoMutate({ deleteTodoId: todo.id, filteredOption });
   };
 
   return (

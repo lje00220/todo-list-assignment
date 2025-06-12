@@ -37,7 +37,7 @@ const TodoListClient = () => {
       {/* 상단 바 영역 */}
       <header className="px-6 py-8">
         <h1 className="mb-6 text-center text-3xl font-bold">투두리스트</h1>
-        <TodoInputForm />
+        <TodoInputForm filteredOption={filteredOption} />
       </header>
 
       <hr className="border-b border-gray-200" />
@@ -51,7 +51,13 @@ const TodoListClient = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          todos?.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+          todos?.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              filteredOption={filteredOption}
+            />
+          ))
         )}
       </section>
     </Container>
