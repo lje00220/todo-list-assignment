@@ -31,8 +31,8 @@ export const useAddTodoMutation = () => {
       FILTER_OPTIONS.forEach((option) => {
         const queryKey = getTodoQueryKey(option);
         queryClient.setQueryData<TodoType[]>(queryKey, (old) => {
-          // 캐시된 데이터가 없으면 새로 생성
-          if (!old) return [tempTodo];
+          // 캐시된 데이터가 없으면 얼리 리턴
+          if (!old) return;
           // 필터 옵션이 COMPLETED인 경우 추가하지 않음(새 투두는 ACTIVE 상태로 추가됨)
           if (option === FILTERS.COMPLETED) return old;
           return [...old, tempTodo];
