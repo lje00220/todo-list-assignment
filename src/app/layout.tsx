@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import TQProvider from '@/providers/TQProvider';
+import ToastProvider from '@/providers/ToastProvider';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -25,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TQProvider>{children}</TQProvider>
+        <ToastProvider>
+          <TQProvider>{children}</TQProvider>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -2,9 +2,12 @@
 
 import { useTodoQuery } from '@/hooks/useTodoQuery';
 import { useState } from 'react';
+import Container from './Container';
 import TodoInputForm from './TodoInputForm';
 import Dropdown from './Dropdown';
 import TodoItem from './TodoItem';
+import Loading from './Loading';
+import Error from './Error';
 import { FilterType } from '@/types/TodoType';
 import { FILTERS } from '@/constants';
 
@@ -18,8 +21,7 @@ const TodoListClient = () => {
 
   const { data: todos, isLoading, isError } = useTodoQuery(filteredOption);
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>데이터를 불러오는 데 문제가 발생했습니다.</div>;
+  if (isError) return <Error />;
 
   // 완료한 일을 뒤로 정렬하는 로직
   todos?.sort((a, b) => {
@@ -31,25 +33,34 @@ const TodoListClient = () => {
   });
 
   return (
-    <main className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="flex h-[80vh] w-full flex-col rounded-lg bg-white py-10 shadow-xl sm:h-[70vh] sm:w-2/3 md:w-3/5 lg:w-1/2">
-        {/* 상단 바 영역 */}
-        <header className="px-6 py-8">
-          <h1 className="mb-6 text-center text-3xl font-bold">투두리스트</h1>
-          <TodoInputForm />
-        </header>
+    <Container>
+      {/* 상단 바 영역 */}
+      <header className="px-6 py-8">
+        <h1 className="mb-6 text-center text-3xl font-bold">투두리스트</h1>
+        <TodoInputForm filteredOption={filteredOption} />
+      </header>
 
-        <hr className="border-b border-gray-200" />
+      <hr className="border-b border-gray-200" />
 
-        {/* 리스트 영역 */}
-        <section className="flex flex-col gap-3 overflow-y-auto px-4 py-6 sm:px-8">
-          <div className="flex justify-end">
-            <Dropdown setFilteredOption={setFilteredOption} />
-          </div>
-          {todos?.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
-        </section>
-      </div>
-    </main>
+      {/* 리스트 영역 */}
+      <section className="flex h-full flex-col gap-3 overflow-y-auto px-4 py-6 sm:px-8">
+        <div className="flex justify-end">
+          <Dropdown setFilteredOption={setFilteredOption} />
+        </div>
+
+        {isLoading ? (
+          <Loading />
+        ) : (
+          todos?.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              filteredOption={filteredOption}
+            />
+          ))
+        )}
+      </section>
+    </Container>
   );
 };
 

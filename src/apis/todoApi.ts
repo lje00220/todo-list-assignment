@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_PATHS, FILTERS } from '@/constants';
-import { FilterType, TodoType } from '@/types/TodoType';
+import { FilterType, TodoFetchType, TodoType } from '@/types/TodoType';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -23,7 +23,13 @@ export const getTodos = async (
   }
 
   const response = await api.get(url);
-  return response.data;
+
+  // todo 아이디를 문자열로 변환
+  const normalizedData = response.data.map((todo: TodoFetchType) => ({
+    ...todo,
+    id: String(todo.id),
+  }));
+  return normalizedData;
 };
 
 /**
