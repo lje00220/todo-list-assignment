@@ -31,7 +31,7 @@ const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
 
   const handleToggleTodo = () => {
     const updatedTodo = { ...todo, completed: !todo.completed };
-    updateTodoMutate({ updatedTodo, filteredOption });
+    updateTodoMutate(updatedTodo);
   };
 
   const handleUpdateTodo = () => {
@@ -47,12 +47,12 @@ const TodoItem = ({ todo, filteredOption }: TodoItemProps) => {
     }
 
     const updatedTodo = { ...todo, title: editValue };
-    updateTodoMutate({ updatedTodo, filteredOption });
+    updateTodoMutate(updatedTodo);
     setIsEditing(false);
   };
 
   const handleDeleteTodo = () => {
-    deleteTodoMutate({ deleteTodoId: todo.id, filteredOption });
+    deleteTodoMutate(todo.id);
   };
 
   return (

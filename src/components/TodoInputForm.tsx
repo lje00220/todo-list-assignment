@@ -35,7 +35,7 @@ const TodoInputForm = ({ filteredOption }: TodoInputFormProps) => {
       completed: false,
     };
 
-    addTodoMutate({ newTodo, filteredOption });
+    addTodoMutate(newTodo);
     setInputValue('');
   };
 
